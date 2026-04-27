@@ -1,12 +1,15 @@
 export default function FleetStrip() {
   const items = ['BONSUR', '●', 'LOGÍSTICA', '●', 'TRANSPORTE', '●', 'ALMACENAMIENTO', '●']
 
-  const track = items.map((item, i) =>
-    item === '●'
-      ? <span key={i} className="text-accent" style={{ fontSize: 60, WebkitTextStroke: 0, alignSelf: 'center', lineHeight: 1 }}>●</span>
-      : <span key={i}>{item}</span>
-  )
+  const makeTrack = (offset: number) =>
+    items.map((item, i) =>
+      item === '●'
+        ? <span key={offset + i} className="text-accent" style={{ fontSize: 60, WebkitTextStroke: 0, alignSelf: 'center', lineHeight: 1 }}>●</span>
+        : <span key={offset + i}>{item}</span>
+    )
 
+  // 4 copias: la animación mueve -50% (2 copias), las otras 2 garantizan
+  // que la pantalla esté siempre llena en cualquier resolución
   return (
     <div className="relative py-20 border-t border-line overflow-hidden"
          style={{ background: 'linear-gradient(180deg,var(--color-bg) 0%,var(--color-bg-2) 100%)' }}>
@@ -19,8 +22,10 @@ export default function FleetStrip() {
              WebkitTextStroke: '1.5px rgba(255,255,255,0.25)',
              letterSpacing: '-.03em',
            }}>
-        {track}
-        {track}
+        {makeTrack(0)}
+        {makeTrack(100)}
+        {makeTrack(200)}
+        {makeTrack(300)}
       </div>
     </div>
   )
