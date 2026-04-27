@@ -3,9 +3,9 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useGLTF, Environment, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
 
-// Mouse position normalised to [-1, 1] relative to the viewport center,
-// updated on window so the truck reacts from anywhere on the page.
 const globalMouse = { x: 0, y: 0 }
+// Detecta si el dispositivo es touch (sin cursor)
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
 
 if (typeof window !== 'undefined') {
   window.addEventListener('mousemove', (e) => {
@@ -17,11 +17,11 @@ if (typeof window !== 'undefined') {
 function TruckModel() {
   const { scene } = useGLTF('/truck.glb')
   const groupRef = useRef<THREE.Group>(null)
-  const rotY = useRef(0)
+  const rotY = useRef(Math.PI)
   const rotX = useRef(0)
+  const clock = useRef(0)
 
   useEffect(() => {
-    // Auto-fit: measure bounding box and centre + scale the model
     const box = new THREE.Box3().setFromObject(scene)
     const size = new THREE.Vector3()
     const center = new THREE.Vector3()
@@ -42,14 +42,24 @@ function TruckModel() {
     })
   }, [scene])
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (!groupRef.current) return
-    // Math.PI base keeps the front facing the camera at rest.
-    // Mouse X steers the nose left/right; mouse Y tilts slightly up/down.
-    const targetY = Math.PI + globalMouse.x * 0.65
-    const targetX = -globalMouse.y * 0.18
-    rotY.current += (targetY - rotY.current) * 0.15
-    rotX.current += (targetX - rotX.current) * 0.15
+
+    if (isTouchDevice) {
+      // En mobile: rotación automática suave de lado a lado
+      clock.current += delta * 0.5
+      const targetY = Math.PI + Math.sin(clock.current) * 0.7
+      const targetX = Math.sin(clock.current * 0.4) * 0.08
+      rotY.current += (targetY - rotY.current) * 0.04
+      rotX.current += (targetX - rotX.current) * 0.04
+    } else {
+      // Desktop: sigue el cursor
+      const targetY = Math.PI + globalMouse.x * 0.65
+      const targetX = -globalMouse.y * 0.18
+      rotY.current += (targetY - rotY.current) * 0.15
+      rotX.current += (targetX - rotX.current) * 0.15
+    }
+
     groupRef.current.rotation.y = rotY.current
     groupRef.current.rotation.x = rotX.current
   })
