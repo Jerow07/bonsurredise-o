@@ -29,7 +29,7 @@ function TruckModel() {
     box.getCenter(center)
 
     const maxDim = Math.max(size.x, size.y, size.z)
-    const scale = 3.4 / maxDim
+    const scale = 7.0 / maxDim
     scene.scale.setScalar(scale)
     scene.position.sub(center.multiplyScalar(scale))
 
@@ -48,8 +48,8 @@ function TruckModel() {
     // Mouse X steers the nose left/right; mouse Y tilts slightly up/down.
     const targetY = Math.PI + globalMouse.x * 0.65
     const targetX = -globalMouse.y * 0.18
-    rotY.current += (targetY - rotY.current) * 0.05
-    rotX.current += (targetX - rotX.current) * 0.05
+    rotY.current += (targetY - rotY.current) * 0.15
+    rotX.current += (targetX - rotX.current) * 0.15
     groupRef.current.rotation.y = rotY.current
     groupRef.current.rotation.x = rotX.current
   })
@@ -64,7 +64,7 @@ function TruckModel() {
 function CameraSetup() {
   const { camera } = useThree()
   useEffect(() => {
-    camera.position.set(0, 0.5, 2.6)
+    camera.position.set(0, 0.3, 1.6)
     camera.lookAt(0, 0, 0)
   }, [camera])
   return null
@@ -74,7 +74,7 @@ export default function Truck3D() {
   return (
     <div
       className="w-full rounded-[12px] overflow-hidden"
-      style={{ height: 380, background: 'var(--color-bg)' }}
+      style={{ height: 460, background: 'var(--color-bg)' }}
     >
       <Canvas shadows dpr={[1, 1.5]} gl={{ antialias: true }}>
         <CameraSetup />

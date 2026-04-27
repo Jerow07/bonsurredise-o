@@ -17,14 +17,19 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-line" style={{ background: 'rgba(11,12,14,.85)', backdropFilter: 'blur(12px)' }}>
       <div className="flex items-center justify-between px-7 py-[18px] max-w-[1480px] mx-auto">
         {/* Logo */}
-        <a href="#" aria-label="Bonsur" className="flex items-center gap-3">
-          <img src="/bonsur-logo.svg" alt="Bonsur" className="h-[42px] w-auto brightness-0 invert" />
-          <div className="flex flex-col leading-none" style={{ fontFamily: 'var(--font-display)' }}>
-            <span className="font-bold text-2xl tracking-[.01em] text-ink">BONSUR</span>
-            <small className="text-accent font-medium text-[9px] tracking-[.32em] mt-1 uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
-              LOGÍSTICA
-            </small>
+        <a href="#" aria-label="Bonsur" className="flex flex-col leading-none gap-[3px]"
+           style={{ fontFamily: 'var(--font-display)' }}>
+          <div className="flex items-center font-bold tracking-[.01em] text-ink"
+               style={{ fontSize: 36, lineHeight: 1 }}>
+            <span>B</span>
+            <img src="/favicon.png" alt="" className="inline-block mx-[1px]"
+                 style={{ height: 38, width: 38, objectFit: 'contain', verticalAlign: 'middle' }} />
+            <span>NSUR</span>
           </div>
+          <small className="text-accent font-medium tracking-[.32em] uppercase"
+                 style={{ fontFamily: 'var(--font-mono)', fontSize: 9 }}>
+            LOGÍSTICA
+          </small>
         </a>
 
         {/* Desktop links */}

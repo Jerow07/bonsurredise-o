@@ -14,7 +14,7 @@ export default function Footer() {
       <div className="max-w-[1480px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-[60px]">
         <div>
           <a href="#" className="flex items-center gap-3" aria-label="Bonsur">
-            <img src="/bonsur-logo.svg" alt="Bonsur" className="h-[52px] w-auto brightness-0 invert" />
+            <img src="/bonsur-logo.webp" alt="Bonsur" className="h-[52px] w-auto brightness-0 invert" />
           </a>
           <p className="text-ink-3 text-[13px] leading-[1.6] mt-[14px] max-w-[340px]">
             Bonsur S.A. — Transporte de cargas con enfoque en eficiencia y seguridad. Cargas generales, refrigeradas, contenedores, áridos y distribución de alimentos sobre la Panamericana, desde Benavidez al país.

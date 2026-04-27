@@ -16,7 +16,7 @@ export default function FleetStrip() {
              fontSize: 108,
              fontWeight: 600,
              color: 'transparent',
-             WebkitTextStroke: '1px var(--color-line-2)',
+             WebkitTextStroke: '1.5px rgba(255,255,255,0.25)',
              letterSpacing: '-.03em',
            }}>
         {track}
