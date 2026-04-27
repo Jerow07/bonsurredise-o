@@ -4,12 +4,14 @@ import SectionHeader from '../ui/SectionHeader'
 
 const Truck3D = lazy(() => import('../ui/Truck3D'))
 
-const contactInfo = [
-  { k: 'Teléfono',   v: '11 3477-0102',                accent: true },
-  { k: 'Email',      v: 'contacto@bonsur.com.ar',      accent: false },
-  { k: 'Dirección',  v: 'Ruta 9 · Km 38,3 · Benavidez', accent: false },
-  { k: 'Horario',    v: 'L–V 7:00–19:00 · 24/7 op.',  accent: false },
-  { k: 'Estado',     v: '● ONLINE',                    accent: true },
+const contactInfo: { k: string; v: string; accent: boolean; sub?: boolean }[] = [
+  { k: 'Teléfono',   v: '11 3477-0102',                  accent: true },
+  { k: 'Email',      v: 'contacto@bonsur.com.ar',        accent: false },
+  { k: 'Dirección',  v: 'Ruta 9 · Km 38,3',             accent: false },
+  { k: '',           v: 'Benavidez, Bs. As.',            accent: false, sub: true },
+  { k: 'Horario',    v: 'Lun–Vie  7:00 – 19:00',        accent: false },
+  { k: '',           v: 'Operaciones 24 / 7',            accent: false, sub: true },
+  { k: 'Estado',     v: '● ONLINE',                      accent: true },
 ]
 
 export default function Contact() {
@@ -91,16 +93,27 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            {contactInfo.map((r, i) => (
-              <div key={r.k}
-                   className={`flex justify-between items-center py-[14px] ${i < contactInfo.length - 1 ? 'border-b border-dashed border-line' : ''}`}>
-                <span className="text-ink-3 text-[10px] uppercase tracking-[.2em]" style={{ fontFamily: 'var(--font-mono)' }}>{r.k}</span>
-                <span className={`text-[14px] font-medium ${r.accent ? 'text-accent' : 'text-ink'}`}
-                      style={r.accent ? { fontFamily: 'var(--font-mono)' } : {}}>
-                  {r.v}
-                </span>
-              </div>
-            ))}
+            {contactInfo.map((r, i) => {
+              const isLast = i === contactInfo.length - 1
+              const nextIsSub = !isLast && contactInfo[i + 1].sub
+              if (r.sub) {
+                return (
+                  <div key={i} className="flex justify-end pb-[10px] border-b border-dashed border-line">
+                    <span className="text-ink-3 text-[12px]">{r.v}</span>
+                  </div>
+                )
+              }
+              return (
+                <div key={i}
+                     className={`flex justify-between items-center py-[14px] ${!nextIsSub && !isLast ? 'border-b border-dashed border-line' : ''}`}>
+                  <span className="text-ink-3 text-[10px] uppercase tracking-[.2em]" style={{ fontFamily: 'var(--font-mono)' }}>{r.k}</span>
+                  <span className={`text-[14px] font-medium ${r.accent ? 'text-accent' : 'text-ink'}`}
+                        style={r.accent ? { fontFamily: 'var(--font-mono)' } : {}}>
+                    {r.v}
+                  </span>
+                </div>
+              )
+            })}
 
             {/* 3D Truck */}
             <div className="mt-5 -mx-1">
