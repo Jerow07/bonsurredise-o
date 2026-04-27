@@ -18,7 +18,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between px-7 py-[18px] max-w-[1480px] mx-auto">
         {/* Logo */}
         <a href="#" aria-label="Bonsur" className="flex items-center gap-3">
-          <img src="/bonsur-logo.webp" alt="Bonsur" className="h-[42px] w-auto brightness-0 invert" />
+          <img src="/bonsur-logo.svg" alt="Bonsur" className="h-[42px] w-auto brightness-0 invert" />
           <div className="flex flex-col leading-none" style={{ fontFamily: 'var(--font-display)' }}>
             <span className="font-bold text-2xl tracking-[.01em] text-ink">BONSUR</span>
             <small className="text-accent font-medium text-[9px] tracking-[.32em] mt-1 uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
