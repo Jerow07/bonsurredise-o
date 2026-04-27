@@ -29,7 +29,7 @@ function TruckModel() {
     box.getCenter(center)
 
     const maxDim = Math.max(size.x, size.y, size.z)
-    const scale = 7.0 / maxDim
+    const scale = 3.0 / maxDim
     scene.scale.setScalar(scale)
     scene.position.sub(center.multiplyScalar(scale))
 
@@ -64,8 +64,11 @@ function TruckModel() {
 function CameraSetup() {
   const { camera } = useThree()
   useEffect(() => {
-    camera.position.set(0, 0.3, 1.6)
-    camera.lookAt(0, 0, 0)
+    const cam = camera as THREE.PerspectiveCamera
+    cam.fov = 40  // FOV fijo — evita que el tamaño cambie según el ancho del canvas
+    cam.position.set(0, 0.4, 2.4)
+    cam.lookAt(0, 0, 0)
+    cam.updateProjectionMatrix()
   }, [camera])
   return null
 }
